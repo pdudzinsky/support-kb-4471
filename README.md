@@ -34,3 +34,10 @@ Support desk. Decision records: whoever signed them.
 ---
 
 Exported 2026-10-04 from the `support` repo, `apps/kb/` → `src/`.
+
+## Added to this copy
+
+- The page: `src/routes/kb/incidents/4471/causes/+page.svx`.
+- The page as it renders: `rendered/causes.html`, and a screenshot in `rendered/causes.png`.
+- One ticket per problem: [issues](https://github.com/pdudzinsky/support-kb-4471/issues).
+- A build setup, because the export has none: `package.json`, `vite.config.js`, `src/app.html`, `src/routes/+layout.js`. To build it, run `npm ci`, then `npm run build`. The page comes out at `build/kb/incidents/4471/causes.html`.

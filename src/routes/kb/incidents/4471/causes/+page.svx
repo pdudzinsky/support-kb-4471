@@ -1,0 +1,69 @@
+---
+layout: runbook
+title: '#4471 · the causes behind one ticket'
+owner: support desk
+status: open
+reviewed: 2026-11-02
+signature: pdudzinsky
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) says one issue, one fix queued. Counted by cause, its reports do not
+share one issue, and the queued fix reaches only the largest group.
+
+<Callout kind="warn">
+Fixing the parser does not close this ticket's reports. The booking-v3 form has a bug of its own.
+</Callout>
+
+## What was merged
+
+<CauseTable ticket={4471} />
+
+The last column is the desk's own view: its ticket system still has one ticket. Each cause now
+has a ticket of its own, linked below.
+
+## `parser`: the shared parser reads dates month first
+
+Ticket: [parser reads day-first dates month first](https://github.com/pdudzinsky/support-kb-4471/issues/1).
+
+The shared parser reads every date month first. Tenants in day-first locales write the day first,
+so the day and month come out swapped. This is the bug the queued fix is for.
+
+The reports read as a one-day move stay here because the desk files by tenant. A swapped day and
+month does not explain a one-day move. Read them again after the fix ships: if they keep coming,
+they need a ticket of their own.
+
+## `hint`: the booking-v3 form asks for the month first
+
+Ticket: [booking-v3 tells day-first tenants to type the month first](https://github.com/pdudzinsky/support-kb-4471/issues/2).
+
+The booking-v3 form prints `MM/DD/YYYY` under its date field. People type what it tells them,
+month first, and the form reads the date the tenant's way, day first. The parser fix does not
+change what this form prints, so these reports keep coming until the form changes. The fix is to
+print the hint in the tenant's date order, as booking-v2 already does for its tenants.
+
+Only reports through the form on a booking-v3 tenant belong here. The same tenants' app and email
+reports are `parser`.
+
+## Why one ticket hid this
+
+- **Subjects do not tell the causes apart.** [Decision 0001](/kb/decisions/0001-dedupe-by-subject)
+  merges on subject alone, and both causes use the same subjects.
+- **Intake tags are a guess.** Intake tags a report from the browser it came in on. The cause comes
+  from the tenant and the channel. The `tagged as` column shows how often the two disagree, so do
+  not count by tag.
+- **The export repeats reports.** The ticket system exports pages that overlap. Count unique ids,
+  not rows.
+
+## What should change
+
+- Keep the queued fix on the `parser` ticket, and schedule the `hint` fix on its own.
+- Stop telling reporters that #4471 is one issue with one fix.
+- Replace decision 0001 with a new record. It is accepted, so it stays as written until then.
+
+<RenderStamp {signature} />
