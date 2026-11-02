@@ -4,7 +4,7 @@ title: '#4471 · the causes behind one ticket'
 owner: support desk
 status: closed
 reviewed: 2026-11-02
-signature: pdudzinsky
+signature: v1.eyJzdWIiOiI5MDEiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzYzMDEzMSwiZXhwIjoxNzkzNzE2NTMxfQ.ZSu-UPY5fM60rO4seCASmE_Jy73v98OIx1QX590peRs
 ---
 
 <script>
